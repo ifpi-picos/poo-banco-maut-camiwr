@@ -7,7 +7,7 @@ public class CurrentAccount extends Account {
     private int freeTransfers;
 
     public CurrentAccount(int numberAgency, int numberAccount, double balance, double overdraft, Client client){
-        super(client, numberAgency, numberAccount, balance);
+        super(numberAgency, numberAccount,balance, client);
         this.overdraft = overdraft;
         this.freeTransfers = 2;
     }
@@ -27,28 +27,33 @@ public class CurrentAccount extends Account {
                 destiny.depositar(value - taxa);
              }
              transaction.addTransaction("Transferência", value, correctDateAndHour());
-             System.out.println("Transferência concluída com sucesso");
+             System.out.println("Transferência realizada com sucesso.");
          } else {
              System.out.println("Saldo e/ou cheque especial insuficientes.");
          }
+    }
 
-    }
     @Override
-    public boolean depositar(double value) {
-        double incomeValue = value * income;
-        double incomeWithValue = value + incomeValue;
-        transaction.addTransaction("Depósito realizado com taxa de Rendimento", incomeWithValue, correctDateAndHour());
-        return super.depositar(incomeWithValue);
-    }   
-    @Override
-    public void transferir(Account destiny, double value) {
-        if (value <= balance) {
-            double taxa = value * 0.10;
-            super.sacar(taxa);
-            destiny.depositar(value - taxa);
+    public double sacar(double value) {
+        if (value > 0) {
+            if (value <= (balance + overdraft)) {
+                if (value <= balance) {
+                    balance -= value;
+                } else {
+                    double valorSaque = value - balance;
+                    balance = 0;
+                    overdraft -= valorSaque;
+                }
+                transaction.addTransaction("Saque", value, correctDateAndHour());
+                System.out.println("Saque realizado com sucesso.");
+            } else {
+                System.out.println("Saldo e/ou cheque especial insuficientes.");
+            }
         } else {
-            System.out.println("Saldo insuficiente.");
+            System.out.println("Valor de saque inválido.");
         }
+        return value;
     }
+
 }
 

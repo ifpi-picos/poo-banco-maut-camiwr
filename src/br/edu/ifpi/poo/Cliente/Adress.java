@@ -1,70 +1,70 @@
 package br.edu.ifpi.poo.Cliente;
 
 public class Adress {
-        private String rua;
-        private String numero;
-        private String bairro;
-        private String cidade;
-        private String estado;
-        private String pais;
+        private String street;
+        private String number;
+        private String district;
+        private String city;
+        private String state;
+        private String country;
         private String cep;
     
-        public Adress(String rua, String numero, String bairro, String cidade, String estado, String pais, String cep) {
-            this.rua = rua;
-            this.numero = numero;
-            this.bairro = bairro;
-            this.cidade = cidade;
-            this.estado = estado;
-            this.pais = pais;
+        public Adress(String street, String number, String district, String city, String state, String country, String cep) {
+            this.street = street;
+            this.number = number;
+            this.district = district;
+            this.city = city;
+            this.state = state;
+            this.country = country;
             this.cep = cep;
         }
 
-        public String getRua() {
-            return rua;
+        public String getstreet() {
+            return street;
         }
 
-        public void setRua(String rua) {
-            this.rua = rua;
+        public void setstreet(String street) {
+            this.street = street;
         }
 
-        public String getNumero() {
-            return numero;
+        public String getnumber() {
+            return number;
         }
 
-        public void setNumero(String numero) {
-            this.numero = numero;
+        public void setnumber(String number) {
+            this.number = number;
         }
 
-        public String getBairro() {
-            return bairro;
+        public String getdistrict() {
+            return district;
         }
 
-        public void setBairro(String bairro) {
-            this.bairro = bairro;
+        public void setdistrict(String district) {
+            this.district = district;
         }
 
-        public String getCidade() {
-            return cidade;
+        public String getcity() {
+            return city;
         }
 
-        public void setCidade(String cidade) {
-            this.cidade = cidade;
+        public void setcity(String city) {
+            this.city = city;
         }
 
-        public String getEstado() {
-            return estado;
+        public String getstate() {
+            return state;
         }
 
-        public void setEstado(String estado) {
-            this.estado = estado;
+        public void setstate(String state) {
+            this.state = state;
         }
 
-        public String getPais() {
-            return pais;
+        public String getcountry() {
+            return country;
         }
 
-        public void setPais(String pais) {
-            this.pais = pais;
+        public void setcountry(String country) {
+            this.country = country;
         }
 
         public String getCep() {
@@ -77,6 +77,6 @@ public class Adress {
         
         @Override
         public String toString() {
-            return rua + ", " + numero + ", " + bairro + ", " + cidade + ", " + estado + ", " + pais + ", " + cep;
+            return street + ", " + number + ", " + district + ", " + city + ", " + state + ", " + country + ", " + cep;
         }
     }

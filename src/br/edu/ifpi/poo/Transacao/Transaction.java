@@ -38,7 +38,7 @@ public class Transaction {
         return transactions;
     }
 
-    public void addTransaction (String description, String date, double value){
+    public void addTransaction (String description, double value, String date){
         Transaction transaction = new Transaction(description, date, value);
         transaction.add(transaction);
     }

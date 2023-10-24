@@ -1,13 +1,11 @@
 package br.edu.ifpi.poo.Conta;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.management.Notification;
-
 import br.edu.ifpi.poo.Cliente.Client;
+import br.edu.ifpi.poo.Notificacoes.Notification;
 import br.edu.ifpi.poo.Transacao.Transaction;
 
 public class Account {
@@ -20,7 +18,7 @@ public class Account {
 
 
     // construtor
-    public Account(Client client, int agencyNumber, int accountNumber, double balance) {
+    public Account(int agencyNumber, int accountNumber, double balance, Client client) {
         this.agencyNumber = agencyNumber;
         this.accountNumber = accountNumber;
         this.balance = balance;
@@ -47,22 +45,20 @@ public class Account {
     public Client getClient() {
         return client;
     }
-
-
-    public Notification getNotification() {
-        return notification;
-    }
-
-
+ 
     public double getBalance() {
         return balance;
     }
-
-
-    public List<Transaction> getTransactions() {
-        return transaction.getTransactions;
+    
+    public void setNotification (Notification notification){
+        this.notification = notification;
     }
 
+    public List<Transaction> getTransactions() {
+        return transaction.getTransactions();
+    }
+
+    // hora e data certas para o extrato
     protected String correctDateAndHour (){
         Date dateHourNow = new Date();
         SimpleDateFormat format = new SimpleDateFormat("hh:mm - dd/mm/aaaa");
@@ -84,6 +80,7 @@ public class Account {
         return false;
     }
 
+    //medoto para sacar
     public double sacar(double value){
         if (value <= balance){
             balance -= value;

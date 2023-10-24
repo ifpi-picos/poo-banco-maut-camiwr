@@ -1,31 +1,64 @@
 package br.edu.ifpi.poo.Cliente;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.edu.ifpi.poo.Conta.Account;
+
 public class Client {
-    private String nome;
+    // Atributos privados que representam informações do cliente
+    private String name;
     private String cpf;
-    private String dataNascimento;
-    private Adress endereco;
+    private LocalDate dateOfBirth;
+    private Adress adress;
+    private List<Account> accounts;
 
-    public Client(String nome, String cpf, String dataNascimento, Adress endereco) {
-        this.nome = nome;
+    //construtor
+    public Client(String name, String cpf, LocalDate dateOfBirth, Adress adress) {
+        this.name = name;
         this.cpf = cpf;
-        this.dataNascimento = dataNascimento;
-        this.endereco = endereco;
+        this.dateOfBirth = dateOfBirth;
+        this.adress = adress;
+        this.accounts = new ArrayList<>();
     }
-    // gets
-    public String getNome() {
-        return nome;
-    }
+    // (getters e setters
 
-    public String getCPF() {
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        if (name.length() > 2) {
+            this.name = name;
+        } else {
+            System.out.println("Nome invalido, digite um nome maior que 2 letras.");
+        }
+    }
+    // cpf so tem get pois nao pode ser alterado
+    public String getCpf() {
         return cpf;
     }
-
-    public String getDataNascimento() {
-        return dataNascimento;
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
-
-    public Adress getEndereco() {
-        return endereco;
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+    public Adress getAdress() {
+        return adress;
+    }
+    public void setAdress(Adress adress) {
+        this.adress = adress;
+    }
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+    // Define a lista de contas associadas ao cliente
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+    // Adiciona uma conta à lista de contas do cliente
+    public void addAccount(Account account) {
+        accounts.add(account);
     }
 }

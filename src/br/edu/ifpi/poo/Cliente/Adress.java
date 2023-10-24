@@ -1,6 +1,6 @@
 package br.edu.ifpi.poo.Cliente;
 
-public class Endereco {
+public class Adress {
         private String rua;
         private String numero;
         private String bairro;
@@ -9,7 +9,7 @@ public class Endereco {
         private String pais;
         private String cep;
     
-        public Endereco(String rua, String numero, String bairro, String cidade, String estado, String pais, String cep) {
+        public Adress(String rua, String numero, String bairro, String cidade, String estado, String pais, String cep) {
             this.rua = rua;
             this.numero = numero;
             this.bairro = bairro;

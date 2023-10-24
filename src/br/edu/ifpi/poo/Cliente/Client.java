@@ -1,12 +1,12 @@
 package br.edu.ifpi.poo.Cliente;
 
-public class Cliente {
+public class Client {
     private String nome;
     private String cpf;
     private String dataNascimento;
-    private Endereco endereco;
+    private Adress endereco;
 
-    public Cliente(String nome, String cpf, String dataNascimento, Endereco endereco) {
+    public Client(String nome, String cpf, String dataNascimento, Adress endereco) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
@@ -25,7 +25,7 @@ public class Cliente {
         return dataNascimento;
     }
 
-    public Endereco getEndereco() {
+    public Adress getEndereco() {
         return endereco;
     }
 }

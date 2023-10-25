@@ -6,10 +6,19 @@ public class CurrentAccount extends Account {
 
     public CurrentAccount(int numberAgency, int numberAccount, double balance, double overdraft, Client client){
         super(numberAgency, numberAccount,balance, client);
-        this.overdraft = overdraft;
+        this.overdraft = 1000;
         this.freeTransfers = 2;
     }
 
+
+    
+    public double getOverdraft() {
+        return overdraft;
+    }
+
+    public int getFreeTransfers() {
+        return freeTransfers;
+    }
     @Override
     public void transferir (Account destiny, double value){
         if (value <= (balance + overdraft)) {
@@ -52,6 +61,7 @@ public class CurrentAccount extends Account {
         }
         return value;
     }
+
 
 }
 

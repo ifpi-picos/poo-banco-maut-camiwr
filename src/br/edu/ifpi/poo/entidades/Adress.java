@@ -2,21 +2,19 @@ package br.edu.ifpi.poo.entidades;
 
 public class Adress {
         private String street;
-        private String number;
+        private int number;
         private String district;
         private String city;
         private String state;
         private String country;
-        private String cep;
     
-        public Adress(String street, String number, String district, String city, String state, String country, String cep) {
+        public Adress(String street, int number, String district, String city, String state, String country) {
             this.street = street;
             this.number = number;
             this.district = district;
             this.city = city;
             this.state = state;
             this.country = country;
-            this.cep = cep;
         }
 
         public String getstreet() {
@@ -27,11 +25,11 @@ public class Adress {
             this.street = street;
         }
 
-        public String getnumber() {
+        public int getnumber() {
             return number;
         }
 
-        public void setnumber(String number) {
+        public void setnumber(int number) {
             this.number = number;
         }
 
@@ -67,16 +65,9 @@ public class Adress {
             this.country = country;
         }
 
-        public String getCep() {
-            return cep;
-        }
-
-        public void setCep(String cep) {
-            this.cep = cep;
-        }
-        
+    
         @Override
         public String toString() {
-            return street + ", " + number + ", " + district + ", " + city + ", " + state + ", " + country + ", " + cep;
+            return street + ", " + number + ", " + district + ", " + city + ", " + state + ", " + country;
         }
     }

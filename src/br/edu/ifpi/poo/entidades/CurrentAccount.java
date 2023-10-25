@@ -70,7 +70,7 @@ public class CurrentAccount extends Account {
         }
         return value;
     }
-    public void informationUserCurrent(Client client, Adress adress) {
+    public static void informationUserCurrent(Client client, Adress adress) {
         if (client != null) {
             System.out.println("Informações do Cliente:");
             System.out.println("Nome: " + client.getName());

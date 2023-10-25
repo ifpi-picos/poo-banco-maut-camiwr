@@ -32,7 +32,6 @@ public class Main {
             System.out.println("================================");
             System.out.println("=== 1 -> Criar conta ===========");
             System.out.println("=== 2 -> Logar na conta ========");
-            System.out.println("=== 3 -> Informações do usuario=");
             System.out.println("=== 0 -> sair ==================");
             System.out.println("================================");
             System.out.print("-> Digite a opcao desejada:");
@@ -55,12 +54,6 @@ public class Main {
                 case 2:
                 logAccount(scanner, accounts);
                     break;
-
-                case 3:
-                //informationUser(null, null);
-                //informacoes do ususario
-                    break;
-
                 case 0:
                     break;
 

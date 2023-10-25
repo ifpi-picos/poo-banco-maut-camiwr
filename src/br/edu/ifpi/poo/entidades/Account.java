@@ -7,17 +7,17 @@ import java.util.List;
 
 import br.edu.ifpi.poo.notificacoes.Notification;
 
-public class Account {
+public abstract class Account {
     private int agencyNumber;
     private int accountNumber;
     private Client client;
-    private Notification notification;
+    protected Notification notification;
     protected double balance;
     protected List<Transaction> transactions;
 
 
     // construtor
-    public Account(int agencyNumber, int accountNumber, double balance, Client client) {
+    public Account(int agencyNumber, int accountNumber, double balance, Client client, Notification notification2) {
         this.agencyNumber = agencyNumber;
         this.accountNumber = accountNumber;
         this.balance = balance;
@@ -60,65 +60,73 @@ public class Account {
         return format.format(dateHourNow);
     }
     //metodo para depositar
-    public boolean depositar(double value){
-        balance += value;
-        transactions.add(new Transaction("deposito",value));
-
-        if (notification != null) {
-                notification.sendNotification("Depósito", value);
-            } else {
-                System.out.println("Nao foi possível enviar uma notificação.");
+    public boolean depositar(double value, Notification chooseNotification){
+        if (chooseNotification != null) {
+            balance += value;
+            transactions.add(new Transaction("Depósito",value));
+            chooseNotification.sendNotification("Depósito", value);
+    
+            System.out.println("Depósito concluído com sucesso.");
+        }else {
+            System.out.println("Notificação não definida. A transferência não pode ser realizada.");
         }
-
-        System.out.println("Depósito concluído com sucesso.");
         return false;
     }
 
     //medoto para sacar
-    public double sacar(double value){
-        if (value <= balance){
-            balance -= value;
-        transactions.add(new Transaction("saque",value));
-
-            if (notification != null) {
-                notification.sendNotification("Saque", value);
+    public double sacar(double value, Notification chooseNotification){
+        if (chooseNotification != null) {
+            if (value <= balance){
+                balance -= value;
+            transactions.add(new Transaction("saque",value));
+    
+                if (notification != null) {
+                    this.notification.sendNotification("Saque", value);
+                } else {
+                    System.out.println("Nao foi possível enviar uma notificação.");
+                }
+    
+                System.out.println("Saque concluído com sucesso");
             } else {
-                System.out.println("Nao foi possível enviar uma notificação.");
+                System.out.println("Saldo insuficiente.");
             }
-
-            System.out.println("Saque concluído com sucesso");
+                
         } else {
-            System.out.println("Saldo insuficiente.");
+            System.out.println("Notificação não definida. A transferência não pode ser realizada.");
         }
         return value;
     }
 
     // método para transferir
-    public void transferir(Account destiny, double value){
-        if (value <= balance){
-            balance -= value;
-            destiny.depositar(value);
-            transactions.add(new Transaction("Transferencia",value));
-            if (notification != null) {
-                notification.sendNotification("Transferência", value);
-            } else {
-                System.out.println("Não foi possível enviar uma notificação.");
-            }
+    public void transferir(Account destiny, double value, Notification chooseNotification){
+            if (chooseNotification != null) {
+                if (value <= balance){
+                balance -= value;
+                destiny.depositar(value, notification);
+                transactions.add(new Transaction("Transferencia",value));
+                if (notification != null) {
+                this.notification.sendNotification("Transferencia", value);
+                } else {
+                    System.out.println("Não foi possível enviar uma notificação.");
+                }
 
-            System.out.println("Transferência concluída com sucesso");
-        } else {
-            System.out.println("Saldo insuficiente.");
+                System.out.println("Transferência concluída com sucesso");
+            } else {
+                System.out.println("Saldo insuficiente.");
+            }
+        }else {
+            System.out.println("Notificação não definida. A transferência não pode ser realizada.");
         }
     }
 
     public void displayTransactions(){
         for (Transaction account : transactions) {
-            System.out.println("\n******************");
+            System.out.println("\n******************************************");
             System.out.println(
-                    "Tipo ->" + account.getDescription() +
+                    "Tipo -> " + account.getDescription() +
                             "\nValor -> R$" + account.getValue() +
-                            "\nData ->" + account.getDate());
-            System.out.println("\n******************");
+                            "\nData -> " + account.getDate());
+            System.out.println("\n******************************************");
         }
     }
 }

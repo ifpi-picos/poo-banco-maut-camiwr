@@ -10,6 +10,7 @@ import br.edu.ifpi.poo.entidades.Client;
 import br.edu.ifpi.poo.entidades.CurrentAccount;
 import br.edu.ifpi.poo.entidades.SavingsAccount;
 import br.edu.ifpi.poo.notificacoes.EmailNotification;
+import br.edu.ifpi.poo.notificacoes.Notification;
 import br.edu.ifpi.poo.notificacoes.SmsNoticication;
 //import br.edu.ifpi.poo.entidades.Transaction;
 
@@ -17,9 +18,7 @@ import br.edu.ifpi.poo.notificacoes.SmsNoticication;
 public class Main {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
-        List<Account> accounts = new ArrayList<>();
-
-        
+        List<Account> accounts = new ArrayList<>();        
 
             System.out.println("--------------------------------");
             System.out.println(" Ola, Bem-vindo ao Banco Maut!");
@@ -46,6 +45,11 @@ public class Main {
                 if( newAccount != null){
                     accounts.add(newAccount);
                 }
+                chooseNotification(scanner);
+
+                newAccount.setNotification(new EmailNotification());
+                newAccount.setNotification(new SmsNoticication());
+
                 break;
 
                 case 2:
@@ -53,7 +57,7 @@ public class Main {
                     break;
 
                 case 3:
-                informationUser(null, null);
+                //informationUser(null, null);
                 //informacoes do ususario
                     break;
 
@@ -138,9 +142,14 @@ public class Main {
             System.out.println("-------------------------------------------------");
             System.out.println("O valor do seu cheque especial é de: R$" + overdraft);
             System.out.println("-------------------------------------------------");
-            newAccount = new CurrentAccount(agencyNumber, accountNumber, contaOpcao, overdraft, client);
+            newAccount = new CurrentAccount(agencyNumber, accountNumber, contaOpcao, overdraft, client, new EmailNotification());
+            newAccount.setNotification(new EmailNotification());
+            newAccount.setNotification(new SmsNoticication());
+
         } else if (contaOpcao == 2){
-            newAccount = new SavingsAccount(contaOpcao, agencyNumber, accountNumber, contaOpcao, client);
+            newAccount = new SavingsAccount(contaOpcao, agencyNumber, accountNumber, contaOpcao, client, null);
+            newAccount.setNotification(new EmailNotification());
+            newAccount.setNotification(new SmsNoticication());
         } else{
             System.out.println("Opção inválida. Tente cadastrar novamente.");
         }
@@ -207,13 +216,13 @@ public class Main {
                     System.out.print("Digite o valor do depósito: ");
                     double depositAmount = scanner.nextDouble();
                     scanner.nextLine();
-                    account.depositar(depositAmount);
+                    account.depositar(depositAmount, null);
                     break;
                 case 2: // Saque
                     System.out.print("Digite o valor do saque: ");
                     double withdrawAmount = scanner.nextDouble();
                     scanner.nextLine();
-                    account.sacar(withdrawAmount);
+                    account.sacar(withdrawAmount, null);
                     break;
                 case 3: // Transferência
                     System.out.print("Digite o número da agência de destino: ");
@@ -227,7 +236,7 @@ public class Main {
                         System.out.print("Digite o valor da transferência: ");
                         double transferAmount = scanner.nextDouble();
                         scanner.nextLine();
-                        account.transferir(destAccount, transferAmount);
+                        account.transferir(destAccount, transferAmount, null);
                     } else {
                         System.out.println("Conta de destino não encontrada.");
                     }
@@ -266,13 +275,13 @@ public class Main {
                     System.out.print("Digite o valor do depósito: ");
                     double depositAmount = scanner.nextDouble();
                     scanner.nextLine();
-                    account.depositar(depositAmount);
+                    account.depositar(depositAmount, null);
                     break;
                 case 2: // Saque
                     System.out.print("Digite o valor do saque: ");
                     double withdrawAmount = scanner.nextDouble();
                     scanner.nextLine();
-                    account.sacar(withdrawAmount);
+                    account.sacar(withdrawAmount, null);
                     break;
                 case 3: // Transferência
                     System.out.print("Digite o número da agência de destino: ");
@@ -286,7 +295,7 @@ public class Main {
                         System.out.print("Digite o valor da transferência: ");
                         double transferAmount = scanner.nextDouble();
                         scanner.nextLine();
-                        account.transferir(destAccount, transferAmount);
+                        account.transferir(destAccount, transferAmount, null);
                     } else {
                         System.out.println("Conta de destino não encontrada.");
                     }
@@ -302,19 +311,21 @@ public class Main {
         }
     }
 
-    public static void informationUser(Client client, Adress adress){
-        System.out.println("\nInformações do usuario:");
-        System.out.println("Nome: " + client.getName());
-        System.out.println("CPF: " + client.getCpf());
-        System.out.println("Data de Nascimento: " + client.getDateOfBirth());
+    public static Notification chooseNotification(Scanner scanner){
+        System.out.println("\nEscolha o meio de notificaçao:");
+        System.out.println("1 -> Email");
+        System.out.println("2 -> SMS");
+        System.out.print("Opção:");
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
 
-        System.out.println("\nInformações de endereço");
-        System.out.println("Rua: "+ adress.getstreet() + ", N°" + adress.getnumber());
-        System.out.println("Bairro: "+ adress.getdistrict());
-        System.out.println("Cidade: "+ adress.getcity());
-        System.out.println("Estado:"+ adress.getstate());
-        System.out.println("Pais: "+ adress.getcountry());
+        if(opcao == 1) {
+            return new EmailNotification();
+        } else if (opcao == 2) {
+            return new SmsNoticication();
+        } else {
+            System.out.println("Opção invalida. Notificaçao por email padrao.");
+            return new EmailNotification();
+        }
     }
-    
-    
 }

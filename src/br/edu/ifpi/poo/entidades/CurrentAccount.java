@@ -1,6 +1,4 @@
-package br.edu.ifpi.poo.Conta;
-
-import br.edu.ifpi.poo.Cliente.Client;
+package br.edu.ifpi.poo.entidades;
 
 public class CurrentAccount extends Account {
     private double overdraft;

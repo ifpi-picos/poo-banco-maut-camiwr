@@ -1,12 +1,10 @@
-package br.edu.ifpi.poo.Conta;
+package br.edu.ifpi.poo.entidades;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import br.edu.ifpi.poo.Cliente.Client;
-import br.edu.ifpi.poo.Notificacoes.Notification;
-import br.edu.ifpi.poo.Transacao.Transaction;
+import br.edu.ifpi.poo.notificacoes.Notification;
 
 public class Account {
     private int agencyNumber;

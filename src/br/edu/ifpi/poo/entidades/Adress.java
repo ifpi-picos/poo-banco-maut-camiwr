@@ -1,4 +1,4 @@
-package br.edu.ifpi.poo.Cliente;
+package br.edu.ifpi.poo.entidades;
 
 public class Adress {
         private String street;

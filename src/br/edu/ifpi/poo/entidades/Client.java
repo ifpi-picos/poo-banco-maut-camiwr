@@ -1,10 +1,8 @@
-package br.edu.ifpi.poo.Cliente;
+package br.edu.ifpi.poo.entidades;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import br.edu.ifpi.poo.Conta.Account;
 
 public class Client {
     // Atributos privados que representam informações do cliente

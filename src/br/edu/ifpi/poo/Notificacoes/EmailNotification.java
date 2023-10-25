@@ -1,4 +1,4 @@
-package br.edu.ifpi.poo.Notificacoes;
+package br.edu.ifpi.poo.notificacoes;
 
 public class EmailNotification implements Notification {
     // método sobrescrito da Interface Notificacao

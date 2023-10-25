@@ -1,4 +1,4 @@
-package br.edu.ifpi.poo.Transacao;
+package br.edu.ifpi.poo.entidades;
 
 import java.util.ArrayList;
 import java.util.List;

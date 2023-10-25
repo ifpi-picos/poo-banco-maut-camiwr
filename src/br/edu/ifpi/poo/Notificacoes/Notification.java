@@ -1,4 +1,4 @@
-package br.edu.ifpi.poo.Notificacoes;
+package br.edu.ifpi.poo.notificacoes;
 
 public interface Notification {
     void sendNotification(String type, double value);

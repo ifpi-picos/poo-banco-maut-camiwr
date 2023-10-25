@@ -1,23 +1,17 @@
 package br.edu.ifpi.poo.entidades;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Transaction {
-    private String date;
+    private Date date;
     private String description;
     private double value;
 
-    public Transaction(String date, String description, double value) {
-        this.date = date;
+    public Transaction(String description, double value) {
+        this.date = new Date();
         this.description = description;
         this.value = value;
-    }
-
-    private List<Transaction> transactions;
-
-    public Transaction(){
-        this.transactions = new ArrayList<>();
     }
 
     @Override
@@ -25,20 +19,19 @@ public class Transaction {
         return "data: " + date + ", Descrição: " + description + ", valor: " + value;
     }
 
-    //!!
+    public Date getDate() {
+        return date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
     public List<Transaction> getTransactions() {
-        return transactions;
-    }
-
-    public void addTransaction (String description, double value, String date){
-        Transaction transaction = new Transaction(description, date, value);
-        transaction.add(transaction);
-    }
-
-    private void add(Transaction transaction) {
-    }
-
-    public void clearTransactions(){
-        transactions.clear();
+        return null;
     } 
 }

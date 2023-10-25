@@ -13,6 +13,8 @@ public class SavingsAccount extends Account {
         if (value <= balance){
             double taxa = value * 0.05;
             super.sacar(value + taxa);
+            transactions.add(new Transaction("Saque",value));
+
             return value;
         }else {
             System.out.println("Saldo insuficiente.");
@@ -25,6 +27,7 @@ public class SavingsAccount extends Account {
             double taxa = value * 0.10;
             super.sacar(taxa);
             destiny.depositar(value - taxa);
+            transactions.add(new Transaction("Transferencia",value));
         } else {
             System.out.println("Saldo insuficiente.");
         }
@@ -33,7 +36,7 @@ public class SavingsAccount extends Account {
     public boolean depositar(double value) {
         double incomeValue = value * income;
         double incomeWithValue = value + incomeValue;
-        transaction.addTransaction("Depósito realizado com taxa de Rendimento", incomeWithValue, correctDateAndHour());
-        return super.depositar(incomeWithValue);
+        transactions.add(new Transaction("Deposito",value));
+            return super.depositar(incomeWithValue);
     }   
 }

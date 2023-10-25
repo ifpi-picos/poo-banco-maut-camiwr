@@ -10,8 +10,8 @@ import br.edu.ifpi.poo.entidades.Client;
 import br.edu.ifpi.poo.entidades.CurrentAccount;
 import br.edu.ifpi.poo.entidades.SavingsAccount;
 import br.edu.ifpi.poo.notificacoes.EmailNotification;
-//import br.edu.ifpi.poo.notificacoes.SmsNoticication;
-import br.edu.ifpi.poo.entidades.Transaction;
+import br.edu.ifpi.poo.notificacoes.SmsNoticication;
+//import br.edu.ifpi.poo.entidades.Transaction;
 
 
 public class Main {
@@ -54,7 +54,6 @@ public class Main {
 
                 case 3:
                 informationUser(null, null);
-                
                 //informacoes do ususario
                     break;
 
@@ -94,6 +93,7 @@ public class Main {
         int number = scanner.nextInt();
         System.out.print("Bairro: ");
         String district = scanner.nextLine();
+        scanner.nextLine();
         System.out.print("Cidade: ");
         String city = scanner.nextLine();
         System.out.print("Estado: ");
@@ -236,7 +236,7 @@ public class Main {
                     System.out.println("Saldo atual: R$" + account.getBalance());
                     break;
                 case 5: // Exibir Extrato
-                //! erro
+                account.displayTransactions();
                     break;
                 case 0: // Voltar
                     return;

@@ -32,8 +32,8 @@ public class CurrentAccount extends Account {
                 balance -= (value + taxa);
                 destiny.balance +=(value);
              }
-             transaction.addTransaction("Transferência", value, correctDateAndHour());
-             System.out.println("Transferência realizada com sucesso.");
+             transactions.add(new Transaction("Transferencia",value));
+              System.out.println("Transferência realizada com sucesso.");
          } else {
              System.out.println("Saldo e cheque especial insuficientes.");
          }
@@ -50,7 +50,7 @@ public class CurrentAccount extends Account {
                     balance = 0;
                     overdraft -= valorSaque;
                 }
-                transaction.addTransaction("Saque", value, correctDateAndHour());
+                transactions.add(new Transaction("Saque",value));
                 System.out.println("Saque realizado com sucesso.");
             } else {
                 System.out.println("Saldo e/ou cheque especial insuficientes.");
@@ -60,6 +60,23 @@ public class CurrentAccount extends Account {
         }
         return value;
     }
+    public void informationUserCurrent(Client client, Adress adress) {
+        if (client != null) {
+            System.out.println("Informações do Cliente:");
+            System.out.println("Nome: " + client.getName());
+            System.out.println("CPF: " + client.getCpf());
+            System.out.println("Data de nascimento: " + client.getDateOfBirth());
+            System.out.println("\nInformações de endereço");
+            System.out.println("Rua: "+ adress.getstreet() + ", N°" + adress.getnumber());
+            System.out.println("Bairro: "+ adress.getdistrict());
+            System.out.println("Cidade: "+ adress.getcity());
+            System.out.println("Estado:"+ adress.getstate());
+            System.out.println("Pais: "+ adress.getcountry());
+        } else {
+            System.out.println("Nenhum cliente associado a esta conta.");
+        }
+    }
+    
 
 
 }

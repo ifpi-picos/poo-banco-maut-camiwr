@@ -1,6 +1,7 @@
 package br.edu.ifpi.poo.entidades;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class Account {
     private Client client;
     private Notification notification;
     protected double balance;
-    protected Transaction transaction;
+    protected List<Transaction> transactions;
 
 
     // construtor
@@ -21,15 +22,15 @@ public class Account {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.client = client;
-        this.transaction = new Transaction();
+        this.transactions = new ArrayList<>();
         client.addAccount(this); 
         }
 
-    public Account(String numAgencyDestiny, String numAccountDestiny){
-        this.transaction = new  Transaction();
+    public List<Transaction> geTransactions(){
+        return transactions;
     }
-
-
+    
+    
     public int getAgencyNumber() {
         return agencyNumber;
     }
@@ -58,16 +59,10 @@ public class Account {
         SimpleDateFormat format = new SimpleDateFormat("hh:mm - dd/mm/aaaa");
         return format.format(dateHourNow);
     }
-
-    //metodo para obter transaçoes
-    public List<Transaction> obterTransactions() {
-        return transaction.getTransactions();
-    }
-
     //metodo para depositar
     public boolean depositar(double value){
         balance += value;
-        transaction.addTransaction("Depósito", value, correctDateAndHour());
+        transactions.add(new Transaction("deposito",value));
 
         if (notification != null) {
                 notification.sendNotification("Depósito", value);
@@ -83,7 +78,7 @@ public class Account {
     public double sacar(double value){
         if (value <= balance){
             balance -= value;
-            transaction.addTransaction("Saque", value, correctDateAndHour());
+        transactions.add(new Transaction("saque",value));
 
             if (notification != null) {
                 notification.sendNotification("Saque", value);
@@ -103,8 +98,7 @@ public class Account {
         if (value <= balance){
             balance -= value;
             destiny.depositar(value);
-            transaction.addTransaction("Transferência", value, correctDateAndHour());
-
+            transactions.add(new Transaction("Transferencia",value));
             if (notification != null) {
                 notification.sendNotification("Transferência", value);
             } else {
@@ -114,6 +108,17 @@ public class Account {
             System.out.println("Transferência concluída com sucesso");
         } else {
             System.out.println("Saldo insuficiente.");
+        }
+    }
+
+    public void displayTransactions(){
+        for (Transaction account : transactions) {
+            System.out.println("\n******************");
+            System.out.println(
+                    "Tipo ->" + account.getDescription() +
+                            "\nValor -> R$" + account.getValue() +
+                            "\nData ->" + account.getDate());
+            System.out.println("\n******************");
         }
     }
 }

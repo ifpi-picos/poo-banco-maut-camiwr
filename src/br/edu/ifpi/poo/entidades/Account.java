@@ -52,15 +52,16 @@ public class Account {
         this.notification = notification;
     }
 
-    public List<Transaction> getTransactions() {
-        return transaction.getTransactions();
-    }
-
     // hora e data certas para o extrato
     protected String correctDateAndHour (){
         Date dateHourNow = new Date();
         SimpleDateFormat format = new SimpleDateFormat("hh:mm - dd/mm/aaaa");
         return format.format(dateHourNow);
+    }
+
+    //metodo para obter transaçoes
+    public List<Transaction> obterTransactions() {
+        return transaction.getTransactions();
     }
 
     //metodo para depositar

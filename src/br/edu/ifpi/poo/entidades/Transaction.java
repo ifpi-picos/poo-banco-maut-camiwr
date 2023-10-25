@@ -24,15 +24,7 @@ public class Transaction {
     public String toString() {
         return "data: " + date + ", Descrição: " + description + ", valor: " + value;
     }
-    public String getDate() {
-        return date;
-    }
-    public String getDescription() {
-        return description;
-    }
-    public double getValue() {
-        return value;
-    }
+
     //!!
     public List<Transaction> getTransactions() {
         return transactions;

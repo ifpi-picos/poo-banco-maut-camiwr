@@ -21,22 +21,21 @@ public class CurrentAccount extends Account {
     }
     @Override
     public void transferir (Account destiny, double value){
-        if (value <= (balance + overdraft)) {
+        double taxa = value * 0.10;
+        if (value > 0 && value <= (balance + overdraft)) {
             balance -= value;
 
             if(freeTransfers > 0) {
-                destiny.depositar(value);
+                destiny.balance += value ;
                 freeTransfers--;
             } else {
-                //Taxa 10%
-                double taxa = value * 0.1;
-                super.sacar(taxa);
-                destiny.depositar(value - taxa);
+                balance -= (value + taxa);
+                destiny.balance +=(value);
              }
              transaction.addTransaction("Transferência", value, correctDateAndHour());
              System.out.println("Transferência realizada com sucesso.");
          } else {
-             System.out.println("Saldo e/ou cheque especial insuficientes.");
+             System.out.println("Saldo e cheque especial insuficientes.");
          }
     }
 

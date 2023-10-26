@@ -191,9 +191,9 @@ public class Main {
             System.out.println("==== 1 -> Realizar Depósito ====");
             System.out.println("===== 2 -> Realizar Saque ======");
             System.out.println("= 3 -> Realizar Transferência ==");
-            System.out.println("4 -> Consultar Saldo");
-            System.out.println("5 -> Exibir Extrato");
-            System.out.println("0 -> Voltar");
+            System.out.println("===== 4 -> Consultar Saldo =====");
+            System.out.println("===== 5 -> Exibir Extrato ======");
+            System.out.println("=========== 0 -> Voltar ========");
     
             System.out.print("Escolha a opção desejada: ");
             int opcao = scanner.nextInt();
@@ -250,14 +250,15 @@ public class Main {
 
     public static void savingsAccountTransactions(Scanner scanner, List<Account> accounts, Account account) {
         while (true) {
-            System.out.println("\n=======================");
-            System.out.println("Menu da Conta Poupança");
-            System.out.println("=======================");
-            System.out.println("1 -> Realizar Depósito");
-            System.out.println("2 -> Realizar Saque");
-            System.out.println("3 -> Realizar Transferência");
-            System.out.println("4 -> Consultar Saldo");
-            System.out.println("0 -> Voltar");
+            System.out.println("\n================================");
+            System.out.println("==== Menu da Conta Poupança ====");
+            System.out.println("================================");
+            System.out.println("==== 1 -> Realizar Depósito ====");
+            System.out.println("===== 2 -> Realizar Saque ======");
+            System.out.println("= 3 -> Realizar Transferência ==");
+            System.out.println("===== 4 -> Consultar Saldo =====");
+            System.out.println("===== 5 -> Exibir Extrato ======");
+            System.out.println("=========== 0 -> Voltar ========");
     
             System.out.print("Escolha a opção desejada: ");
             int opcao = scanner.nextInt();
@@ -296,6 +297,10 @@ public class Main {
                 case 4: // Consultar Saldo
                     System.out.println("Saldo atual: R$" + account.getBalance());
                     break;
+                case 5: // Exibir Extrato
+                account.displayTransactions();
+                    break;
+
                 case 0: // Voltar
                     return;
                 default:

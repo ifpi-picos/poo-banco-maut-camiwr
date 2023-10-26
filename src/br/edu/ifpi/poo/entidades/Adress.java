@@ -17,6 +17,7 @@ public class Adress {
             this.country = country;
         }
 
+        // getters e setters
         public String getstreet() {
             return street;
         }

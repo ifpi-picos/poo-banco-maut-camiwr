@@ -52,7 +52,7 @@ public class SavingsAccount extends Account {
         double incomeValue = value * income;
         double incomeWithValue = value + incomeValue;
         transactions.add(new Transaction("Deposito",value));
-        notification.sendNotification("Deposito", value);
+        chooseNotification.sendNotification("Saque", value);
             return super.depositar(incomeWithValue, chooseNotification);
     }   
 }

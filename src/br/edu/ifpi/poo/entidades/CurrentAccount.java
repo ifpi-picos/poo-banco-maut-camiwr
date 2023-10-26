@@ -34,7 +34,7 @@ public class CurrentAccount extends Account {
                     destiny.balance +=(value);
                  }
                  transactions.add(new Transaction("Transferencia",value));
-                 notification.sendNotification("Transferencia", value);
+                 chooseNotification.sendNotification("Saque", value);
                   System.out.println("Transferência realizada com sucesso.");
              } else {
                  System.out.println("Saldo e cheque especial insuficientes.");

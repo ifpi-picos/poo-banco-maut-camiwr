@@ -1,8 +1,6 @@
 package br.edu.ifpi.poo.entidades;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import br.edu.ifpi.poo.notificacoes.Notification;
@@ -53,12 +51,6 @@ public abstract class Account {
         this.notification = notification;
     }
 
-    // hora e data certas para o extrato
-    protected String correctDateAndHour (){
-        Date dateHourNow = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm - dd/mm/aaaa");
-        return format.format(dateHourNow);
-    }
     //metodo para depositar
     public boolean depositar(double value, Notification chooseNotification){
         if (chooseNotification != null) {
@@ -79,13 +71,8 @@ public abstract class Account {
             if (value <= balance){
                 balance -= value;
             transactions.add(new Transaction("saque",value));
-    
-                if (notification != null) {
-                    this.notification.sendNotification("Saque", value);
-                } else {
-                    System.out.println("Nao foi possível enviar uma notificação.");
-                }
-    
+            chooseNotification.sendNotification("Saque", value);
+                System.out.println("----------------------------");
                 System.out.println("Saque concluído com sucesso");
             } else {
                 System.out.println("Saldo insuficiente.");

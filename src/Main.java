@@ -12,7 +12,6 @@ import br.edu.ifpi.poo.entidades.SavingsAccount;
 import br.edu.ifpi.poo.notificacoes.EmailNotification;
 import br.edu.ifpi.poo.notificacoes.Notification;
 import br.edu.ifpi.poo.notificacoes.SmsNoticication;
-//import br.edu.ifpi.poo.entidades.Transaction;
 
 
 public class Main {
@@ -40,19 +39,15 @@ public class Main {
 
             switch(opcao){
                 case 1:
-                Account newAccount = createAccount(scanner);
-                if( newAccount != null){
+                    Account newAccount = createAccount(scanner);
+                    if( newAccount != null){
                     accounts.add(newAccount);
-                }
-                chooseNotification(scanner);
-
-                newAccount.setNotification(new EmailNotification());
-                newAccount.setNotification(new SmsNoticication());
-
+                    }
+                    chooseNotification(scanner);
                 break;
 
                 case 2:
-                logAccount(scanner, accounts);
+                    logAccount(scanner, accounts);
                     break;
                 case 0:
                     break;
@@ -190,15 +185,80 @@ public class Main {
     
     public static void currentAccountTransactions(Scanner scanner, List<Account> accounts, Account account) {
         while (true) {
-            System.out.println("\n=======================");
-            System.out.println("Menu da Conta Corrente");
-            System.out.println("=======================");
-            System.out.println("1 -> Realizar Depósito");
-            System.out.println("2 -> Realizar Saque");
-            System.out.println("3 -> Realizar Transferência");
-            System.out.println("4 -> Consultar Saldo");
-            System.out.println("5 -> Exibir Extrato"); //! erro
-            System.out.println("0 -> Voltar");
+            System.out.println("\n================================");
+            System.out.println("==== Menu da Conta Corrente ====");
+            System.out.println("================================");
+            System.out.println("==== 1 -> Realizar Depósito ====");
+            System.out.println("===== 2 -> Realizar Saque ======");
+            System.out.println("= 3 -> Realizar Transferência ==");
+            System.out.println("===== 4 -> Consultar Saldo =====");
+            System.out.println("===== 5 -> Exibir Extrato ======");
+            System.out.println("=========== 0 -> Voltar ========");
+    
+            System.out.print("Escolha a opção desejada: ");
+            int opcao = scanner.nextInt();
+            scanner.nextLine();
+    
+            switch (opcao) {
+                case 1: // Depósito
+                    System.out.print("Digite o valor do depósito: ");
+                    double depositAmount = scanner.nextDouble();
+                    scanner.nextLine();
+                    account.depositar(depositAmount, null);
+                    break;
+
+                case 2: // Saque
+                    System.out.print("Digite o valor do saque: ");
+                    double withdrawAmount = scanner.nextDouble();
+                    scanner.nextLine();
+                    account.sacar(withdrawAmount, null);
+                    break;
+
+                case 3: // Transferência
+                    System.out.print("Digite o número da agência de destino: ");
+                    int destAgencyNumber = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Digite o número da conta de destino: ");
+                    int destAccountNumber = scanner.nextInt();
+                    scanner.nextLine();
+                    Account destAccount = findAccount(accounts, destAgencyNumber, destAccountNumber);
+                    if (destAccount != null) {
+                        System.out.print("Digite o valor da transferência: ");
+                        double transferAmount = scanner.nextDouble();
+                        scanner.nextLine();
+                        account.transferir(destAccount, transferAmount, null);
+                    } else {
+                        System.out.println("Conta de destino não encontrada.");
+                    }
+                    break;
+
+                case 4: // Consultar Saldo
+                    System.out.println("Saldo atual: R$" + account.getBalance());
+                    break;
+
+                case 5: // Exibir Extrato
+                account.displayTransactions();
+                    break;
+
+                case 0: // Voltar
+                    return;
+                default:
+                    System.out.println("Opção inválida.");
+            }
+        }
+    }
+
+    public static void savingsAccountTransactions(Scanner scanner, List<Account> accounts, Account account) {
+        while (true) {
+            System.out.println("\n================================");
+            System.out.println("==== Menu da Conta Poupança ====");
+            System.out.println("================================");
+            System.out.println("==== 1 -> Realizar Depósito ====");
+            System.out.println("===== 2 -> Realizar Saque ======");
+            System.out.println("= 3 -> Realizar Transferência ==");
+            System.out.println("===== 4 -> Consultar Saldo =====");
+            System.out.println("===== 5 -> Exibir Extrato ======");
+            System.out.println("=========== 0 -> Voltar ========");
     
             System.out.print("Escolha a opção desejada: ");
             int opcao = scanner.nextInt();
@@ -240,62 +300,7 @@ public class Main {
                 case 5: // Exibir Extrato
                 account.displayTransactions();
                     break;
-                case 0: // Voltar
-                    return;
-                default:
-                    System.out.println("Opção inválida.");
-            }
-        }
-    }
 
-    public static void savingsAccountTransactions(Scanner scanner, List<Account> accounts, Account account) {
-        while (true) {
-            System.out.println("\n=======================");
-            System.out.println("Menu da Conta Poupança");
-            System.out.println("=======================");
-            System.out.println("1 -> Realizar Depósito");
-            System.out.println("2 -> Realizar Saque");
-            System.out.println("3 -> Realizar Transferência");
-            System.out.println("4 -> Consultar Saldo");
-            System.out.println("0 -> Voltar");
-    
-            System.out.print("Escolha a opção desejada: ");
-            int opcao = scanner.nextInt();
-            scanner.nextLine();
-    
-            switch (opcao) {
-                case 1: // Depósito
-                    System.out.print("Digite o valor do depósito: ");
-                    double depositAmount = scanner.nextDouble();
-                    scanner.nextLine();
-                    account.depositar(depositAmount, null);
-                    break;
-                case 2: // Saque
-                    System.out.print("Digite o valor do saque: ");
-                    double withdrawAmount = scanner.nextDouble();
-                    scanner.nextLine();
-                    account.sacar(withdrawAmount, null);
-                    break;
-                case 3: // Transferência
-                    System.out.print("Digite o número da agência de destino: ");
-                    int destAgencyNumber = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.print("Digite o número da conta de destino: ");
-                    int destAccountNumber = scanner.nextInt();
-                    scanner.nextLine();
-                    Account destAccount = findAccount(accounts, destAgencyNumber, destAccountNumber);
-                    if (destAccount != null) {
-                        System.out.print("Digite o valor da transferência: ");
-                        double transferAmount = scanner.nextDouble();
-                        scanner.nextLine();
-                        account.transferir(destAccount, transferAmount, null);
-                    } else {
-                        System.out.println("Conta de destino não encontrada.");
-                    }
-                    break;
-                case 4: // Consultar Saldo
-                    System.out.println("Saldo atual: R$" + account.getBalance());
-                    break;
                 case 0: // Voltar
                     return;
                 default:

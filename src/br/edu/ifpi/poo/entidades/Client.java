@@ -20,7 +20,7 @@ public class Client {
         this.adress = adress;
         this.accounts = new ArrayList<>();
     }
-    // (getters e setters
+    // getters e setters
 
     public String getName() {
         return name;

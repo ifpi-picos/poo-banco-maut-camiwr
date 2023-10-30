@@ -1,29 +1,30 @@
 package br.edu.ifpi.poo.entidades;
 
-import  br.edu.ifpi.poo.notificacoes.Notification;
+import br.edu.ifpi.poo.notificacoes.Notification;
 
 public class SavingsAccount extends Account {
-    public double income; //rendimento
+    public double income; // rendimento
 
-    public SavingsAccount(int numberAgency, int numberAccount, double balance, double income, Client client, Notification notification) {
+    public SavingsAccount(int numberAgency, int numberAccount, double balance, double income,
+            Client client, Notification notification) {
         super(numberAgency, numberAccount, balance, client, notification);
         this.income = income;
     }
 
     @Override
-    public double sacar(double value, Notification chooseNotification){
+    public double sacar(double value, Notification chooseNotification) {
         if (chooseNotification != null) {
-            if (value <= balance){
+            if (value <= balance) {
                 double taxa = value * 0.05;
                 super.sacar(value + taxa, chooseNotification);
-                transactions.add(new Transaction("Saque",value));
+                transactions.add(new Transaction("Saque", value));
                 chooseNotification.sendNotification("Saque", value);
                 return value;
-            }else {
+            } else {
                 System.out.println("Saldo insuficiente.");
                 return 0;
             }
-        }else {
+        } else {
             System.out.println("Notificação não definida. A transferência não pode ser realizada.");
         }
         return value;
@@ -36,23 +37,25 @@ public class SavingsAccount extends Account {
                 double taxa = value * 0.10;
                 super.sacar(taxa, chooseNotification);
                 destiny.depositar(value - taxa, chooseNotification);
-                transactions.add(new Transaction("Transferencia",value));
+                transactions.add(new Transaction("Transferencia", value));
                 chooseNotification.sendNotification("Transferencia", value);
-    
+
             } else {
                 System.out.println("Saldo insuficiente.");
             }
-                
-        }else {
+
+        } else {
             System.out.println("Notificação não definida. A transferência não pode ser realizada.");
         }
     }
+
     @Override
     public boolean depositar(double value, Notification chooseNotification) {
         double incomeValue = value * income;
         double incomeWithValue = value + incomeValue;
-        transactions.add(new Transaction("Deposito",value));
+        transactions.add(new Transaction("Deposito", value));
+        // quando tentei fazer a deposito deu erro aqui, notification está nulo
         notification.sendNotification("Deposito", value);
-            return super.depositar(incomeWithValue, chooseNotification);
-    }   
+        return super.depositar(incomeWithValue, chooseNotification);
+    }
 }
